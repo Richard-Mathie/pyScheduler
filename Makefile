@@ -21,7 +21,7 @@ cleancov:
 	-coverage erase
 
 cleanmeta:
-	-rm -rf scheduler.egg-info/
+	-rm -rf TaskScheduler.egg-info/
 
 cleanall: clean cleancov cleanmeta
 	-find . -type f -name "*~" -exec rm -f "{}" \;
@@ -35,7 +35,7 @@ dist: cleanmeta
 	-python setup.py sdist bdist_wheel
 
 package: dist
-	-twine upload dist/scheduler-$(VERSION).tar.gz
+	-twine upload dist/TaskScheduler-$(VERSION).tar.gz
 
 version:
 	-echo "$(VERSION)"

@@ -57,7 +57,7 @@ class Scheduler(Thread):
         self.add_task(task)
         return task
 
-    def rescheduel_task(self, task):
+    def reschedule_task(self, task):
         if task in self.entry_finder:
             self.remove_task(task)
         self.add_task(task)

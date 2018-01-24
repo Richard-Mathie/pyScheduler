@@ -17,7 +17,7 @@ with open('requirements_test.txt') as f:
 __doc__ = readme
 
 setup(
-    name='scheduler',
+    name='TaskScheduler',
     version=version,
     url='https://github.com/Richard-Mathie/pyScheduler',
     license='MIT',
