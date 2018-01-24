@@ -6,18 +6,24 @@ Created on Mon Jan 15 11:40:23 2018
 @author: richard
 """
 from scheduler import Scheduler
+from time import time
 
 
-def test_scheduler(i):
+def test_init():
+    s = Scheduler()
+    assert s is not None
 
-    def hello_task():
-        print 'hello world, ', time() - i
+
+def test_scheduler():
+
+    def hello_task(ts):
+        print 'hello world, ', time() - ts
 
     s = Scheduler()
     s.daemon = True
 
     try:
-        s.schedule_task(5, hello_task, (0,))
+        s.schedule_task(5, hello_task, (time() + 5,))
         s.start()
 
         for i in range(10):
