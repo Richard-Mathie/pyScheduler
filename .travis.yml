@@ -1,0 +1,15 @@
+language: python
+
+python:
+- "2.7"
+- "pypy"
+
+install:
+- pip install -r requirements.txt
+- pip install codeclimate-test-reporter
+- pip install coverage
+
+script:
+- make test
+# - nosetests -v --with-coverage --cover-tests
+
