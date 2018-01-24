@@ -10,9 +10,12 @@ with open('README.rst') as f:
 
 with open('requirements.txt') as f:
     requirements = [r for r in f]
+try:
+    with open('requirements_test.txt') as f:
+        requirements_test = [r for r in f]
+except IOError:
+    requirements_test = None
 
-with open('requirements_test.txt') as f:
-    requirements_test = [r for r in f]
 
 __doc__ = readme
 

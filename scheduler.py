@@ -39,15 +39,19 @@ class Scheduler(Thread):
         self.counter = itertools.count()
 
     def remove_task(self, task):
-        entry = entry_finder.pop(task)
-        entry[-1] = nulltask
+        try:
+            entry = self.entry_finder.pop(task)
+            entry[-1] = self.nulltask
+            return True
+        except KeyError:
+            return False
 
     def add_task(self, task):
         timestamp = task.scheduel_at()
         if timestamp:
             with self.count_lock:
                 count = next(self.counter)
-                entry = (timestamp, count, task)
+                entry = [timestamp, count, task]
                 self.entry_finder[task] = entry
                 self.tasks.put(entry)
             self.new_task.set()
@@ -57,10 +61,15 @@ class Scheduler(Thread):
         self.add_task(task)
         return task
 
-    def reschedule_task(self, task):
-        if task in self.entry_finder:
-            self.remove_task(task)
-        self.add_task(task)
+    def reschedule_task(self, task, add_task=True):
+        """reschedule task to another execution time
+        
+        setting `add_task` to `True` (default) will re add the task
+        even if it has allready executed. Else it is too late to 
+        reschedule the task
+        """
+        if self.remove_task(task) or add_task:
+            self.add_task(task)
 
     def cancel(self):
         """Stop the scheduler if it hasn't finished yet"""
@@ -84,7 +93,7 @@ class Scheduler(Thread):
                     self.new_task.clear()
                 else:
                     if task is not self.nulltask:
-                        del  self.entry_finder[task]
+                        del self.entry_finder[task]
                         task.call()
             except QEmpty:
                 self.new_task.wait(10)
