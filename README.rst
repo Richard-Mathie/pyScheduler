@@ -14,7 +14,7 @@ install
 
 run some tasks some time later
 
-::
+.. code:: python
 
     from scheduler import Scheduler
 

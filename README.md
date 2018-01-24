@@ -11,7 +11,7 @@ pip install TaskScheduler
 
 run some tasks some time later
 
-```
+```python
 from scheduler import Scheduler
 
 
