@@ -1,7 +1,7 @@
 from time import time
 from threading import Thread, Event, Lock
-from Queue import PriorityQueue
-from Queue import Empty as QEmpty
+from queue import PriorityQueue
+from queue import Empty as QEmpty
 import itertools
 
 
