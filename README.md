@@ -16,7 +16,7 @@ from scheduler import Scheduler
 
 
 def hello_world(words):
-    print "Hello World! ", words
+    print("Hello World! ", words)
 
 
 s = Scheduler()
