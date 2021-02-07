@@ -1,7 +1,16 @@
+import sys
 from time import time
 from threading import Thread, Event, Lock
-from Queue import PriorityQueue
-from Queue import Empty as QEmpty
+python_version = sys.version[0:1]
+if python_version == '3':
+    from queue import PriorityQueue
+    from queue import Empty as QEmpty
+elif python_version == '2':
+    from Queue import PriorityQueue
+    from Queue import Empty as QEmpty
+else:
+    from Queue import PriorityQueue
+    from Queue import Empty as QEmpty
 import itertools
 
 
